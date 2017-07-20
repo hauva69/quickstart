@@ -15,6 +15,7 @@ import { HeroService } from './hero.service';
 
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
     private heroService: HeroService,
@@ -30,5 +31,10 @@ export class HeroDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    this.heroService.update(this.hero)
+      .then(() => this.goBack());
   }
 }
